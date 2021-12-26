@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginVC: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -122,7 +122,8 @@ class LoginViewController: UIViewController {
     }
     
     private func checkUser() -> Bool {
-        usernameTextField.text == "admin" && passwordTextField.text == "123"
+        return true
+//        usernameTextField.text == "admin" && passwordTextField.text == "123"
     }
     
     private func presentAler()
