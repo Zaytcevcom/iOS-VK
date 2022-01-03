@@ -8,7 +8,8 @@
 import UIKit
 
 struct UserModel {
-    let id: UInt
+    let id: Int
     let name: String
     let image: UIImage?
+    var photos: [PhotoModel] = []
 }

@@ -146,7 +146,7 @@
             </objects>
             <point key="canvasLocation" x="3184.057971014493" y="-694.41964285714278"/>
         </scene>
-        <!--Friends CollectionVC-->
+        <!--Фото-->
         <scene sceneID="w1x-TX-1vD">
             <objects>
                 <collectionViewController id="dz0-f9-5yY" customClass="FriendsCollectionVC" customModule="VK" customModuleProvider="target" sceneMemberID="viewController">
@@ -154,7 +154,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="1" minimumInteritemSpacing="1" id="0XD-fh-7xR">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="0XD-fh-7xR">
                             <size key="itemSize" width="128" height="128"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -166,7 +166,7 @@
                             <outlet property="delegate" destination="dz0-f9-5yY" id="cP3-31-Ibn"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="fOr-rp-H0F"/>
+                    <navigationItem key="navigationItem" title="Фото" id="fOr-rp-H0F"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JgW-hy-ess" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,36 +13,60 @@ class FriendsTableVC: UITableViewController {
     
     var users = [UserModel]()
 
+    public func setPhotos(id: Int) -> [PhotoModel]
+    {
+        var arr = [PhotoModel]()
+        
+        for i in (1...50) {
+            arr.append(
+                PhotoModel(
+                    id: i,
+                    image: UIImage(named: "monkey0\(id).png") ?? UIImage(),
+                    description: nil,
+                    countLikes: Int.random(in: 50..<250),
+                    isLiked: Int.random(in: 0...3) == 1
+                )
+            )
+        }
+        
+        return arr
+    }
+    
     public func setData()
     {
         users.append(UserModel(
             id: 1,
             name: "Константин Зайцев",
-            image: UIImage(named: "monkey01.png")
+            image: UIImage(named: "monkey01.png"),
+            photos: setPhotos(id: 1)
         ))
         
         users.append(UserModel(
             id: 2,
             name: "Антон Зиновьев",
-            image: UIImage(named: "monkey02.png")
+            image: UIImage(named: "monkey02.png"),
+            photos: setPhotos(id: 2)
         ))
         
         users.append(UserModel(
             id: 3,
             name: "Павел Николаев",
-            image: UIImage(named: "monkey03.png")
+            image: UIImage(named: "monkey03.png"),
+            photos: setPhotos(id: 3)
         ))
         
         users.append(UserModel(
             id: 4,
             name: "Никита Чиров",
-            image: UIImage(named: "monkey04.png")
+            image: UIImage(named: "monkey04.png"),
+            photos: setPhotos(id: 4)
         ))
         
         users.append(UserModel(
             id: 5,
             name: "Николай Кузнецов",
-            image: UIImage(named: "monkey05.png")
+            image: UIImage(named: "monkey05.png"),
+            photos: setPhotos(id: 5)
         ))
         
         tableView.reloadData()

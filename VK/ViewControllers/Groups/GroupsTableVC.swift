@@ -35,7 +35,6 @@ class GroupsTableVC: UITableViewController {
             UINib(nibName: "GroupCell", bundle: nil),
             forCellReuseIdentifier: reuseIdentifier
         )
-        
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

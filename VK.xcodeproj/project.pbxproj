@@ -25,6 +25,10 @@
 		9DC37351276CFC2C0059C9BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DC3734F276CFC2C0059C9BE /* Main.storyboard */; };
 		9DC37353276CFC2F0059C9BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9DC37352276CFC2F0059C9BE /* Assets.xcassets */; };
 		9DC37356276CFC2F0059C9BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DC37354276CFC2F0059C9BE /* LaunchScreen.storyboard */; };
+		9DE9D0802782F003008D0DA7 /* UserAvatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9D07F2782F003008D0DA7 /* UserAvatar.swift */; };
+		9DE9D0832782F4D0008D0DA7 /* AvatarCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9D0822782F4D0008D0DA7 /* AvatarCircle.swift */; };
+		9DE9D0852782F4FD008D0DA7 /* AvatarBackShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9D0842782F4FD008D0DA7 /* AvatarBackShadow.swift */; };
+		9DE9D08727830BBF008D0DA7 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE9D08627830BBF008D0DA7 /* PhotoModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +52,10 @@
 		9DC37352276CFC2F0059C9BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9DC37355276CFC2F0059C9BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9DC37357276CFC2F0059C9BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9DE9D07F2782F003008D0DA7 /* UserAvatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAvatar.swift; sourceTree = "<group>"; };
+		9DE9D0822782F4D0008D0DA7 /* AvatarCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarCircle.swift; sourceTree = "<group>"; };
+		9DE9D0842782F4FD008D0DA7 /* AvatarBackShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarBackShadow.swift; sourceTree = "<group>"; };
+		9DE9D08627830BBF008D0DA7 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +153,7 @@
 			children = (
 				9D4E07422777538500225D1F /* UserModel.swift */,
 				9D4E0744277753C200225D1F /* GroupModel.swift */,
+				9DE9D08627830BBF008D0DA7 /* PhotoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -168,6 +177,7 @@
 		9DC37348276CFC2C0059C9BE /* VK */ = {
 			isa = PBXGroup;
 			children = (
+				9DE9D07E2782EFF1008D0DA7 /* Components */,
 				9D4E07412777535A00225D1F /* Model */,
 				9DC3735E276CFE800059C9BE /* View */,
 				9DC3735D276CFE660059C9BE /* ViewControllers */,
@@ -205,6 +215,24 @@
 				9DC37354276CFC2F0059C9BE /* LaunchScreen.storyboard */,
 			);
 			path = Source;
+			sourceTree = "<group>";
+		};
+		9DE9D07E2782EFF1008D0DA7 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				9DE9D0812782F44D008D0DA7 /* Avatar */,
+				9DE9D07F2782F003008D0DA7 /* UserAvatar.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		9DE9D0812782F44D008D0DA7 /* Avatar */ = {
+			isa = PBXGroup;
+			children = (
+				9DE9D0822782F4D0008D0DA7 /* AvatarCircle.swift */,
+				9DE9D0842782F4FD008D0DA7 /* AvatarBackShadow.swift */,
+			);
+			path = Avatar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,9 +311,13 @@
 			files = (
 				9D4E07342777081F00225D1F /* GroupCell.swift in Sources */,
 				9D4E0730277707E400225D1F /* UserCell.swift in Sources */,
+				9DE9D0852782F4FD008D0DA7 /* AvatarBackShadow.swift in Sources */,
 				9DC3734E276CFC2C0059C9BE /* LoginVC.swift in Sources */,
 				9D573479276DCB9300551FF8 /* FriendsCollectionVC.swift in Sources */,
+				9DE9D0802782F003008D0DA7 /* UserAvatar.swift in Sources */,
+				9DE9D08727830BBF008D0DA7 /* PhotoModel.swift in Sources */,
 				9D573473276DCA8300551FF8 /* GroupsTableVC.swift in Sources */,
+				9DE9D0832782F4D0008D0DA7 /* AvatarCircle.swift in Sources */,
 				9D4E0745277753C200225D1F /* GroupModel.swift in Sources */,
 				9D2B60232778643200A80AD8 /* PhotoCollectionCell.swift in Sources */,
 				9DC3734A276CFC2C0059C9BE /* AppDelegate.swift in Sources */,

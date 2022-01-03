@@ -8,7 +8,7 @@
 import UIKit
 
 struct GroupModel {
-    let id: UInt
+    let id: Int
     let name: String
     let image: UIImage?
 }
