@@ -28,14 +28,13 @@ class LoginVC: UIViewController {
                     action: #selector(hideKeyboard)))
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    /*override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print(#function)
-    }
+    }*/
     
     
     override func viewWillAppear(_ animated: Bool) {

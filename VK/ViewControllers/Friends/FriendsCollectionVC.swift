@@ -13,8 +13,6 @@ class FriendsCollectionVC: UICollectionViewController {
 
     var userModel: UserModel?
     
-//    var photos = [UserModel]()
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -27,7 +25,6 @@ class FriendsCollectionVC: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return photos.count
         return userModel?.photos.count ?? 0
     }
 
@@ -42,7 +39,6 @@ class FriendsCollectionVC: UICollectionViewController {
             return UICollectionViewCell()
         }
         
-//        let currentItem = photos[indexPath.item]
         let currentItem = userModel!.photos[indexPath.item]
         
         cell.configure(
@@ -52,6 +48,33 @@ class FriendsCollectionVC: UICollectionViewController {
         )
     
         return cell
+    }
+    
+    override func prepare( for segue: UIStoryboardSegue, sender: Any? ) {
+        
+        guard
+            segue.identifier == "slidePhoto",
+            let indexPath = collectionView.indexPathsForSelectedItems?.first
+        else {
+            return
+        }
+        
+        guard
+            let destination = segue.destination as? FriendsPhotoVC
+        else {
+            return
+        }
+        
+        destination.photos = userModel!.photos
+        destination.index = indexPath.item
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        defer {
+            collectionView.deselectItem(at: indexPath, animated: true)
+        }
+        
+        performSegue(withIdentifier: "slidePhoto", sender: nil)
     }
 
 }
@@ -69,4 +92,5 @@ extension FriendsCollectionVC: UICollectionViewDelegateFlowLayout
         
         return CGSize(width: width, height: width + 50)
     }
+    
 }

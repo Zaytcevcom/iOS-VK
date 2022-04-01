@@ -34,15 +34,38 @@ class PhotoCollectionCell: UICollectionViewCell {
         let isLiked = !(sender.currentImage == UIImage(systemName: "heart.fill"))
         var countLikes = Int(sender.currentTitle!.trimmingCharacters(in: CharacterSet.whitespaces)) ?? 0
      
-        if (isLiked) {
-            self.isLiked.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            countLikes += 1
-        } else {
-            self.isLiked.setImage(UIImage(systemName: "heart"), for: .normal)
-            countLikes -= 1
+        UIView.performWithoutAnimation {
+            
+            if (isLiked) {
+                self.isLiked.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                countLikes += 1
+            } else {
+                self.isLiked.setImage(UIImage(systemName: "heart"), for: .normal)
+                countLikes -= 1
+            }
+    
+            self.isLiked.setTitle(" \(countLikes)", for: .normal)
+            self.isLiked.layoutIfNeeded()
+            
+            UIImageView.animate(
+                withDuration: 0.2,
+                delay: 0) {
+                    self.isLiked.imageView!.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+                } completion: { _ in
+                    
+                    UIView.animate(
+                        withDuration: 1,
+                        delay: 0,
+                        usingSpringWithDamping: 0.3,
+                        initialSpringVelocity: 0.4
+                    ) {
+                        self.isLiked.imageView!.transform = .identity
+                    }
+                }
         }
         
-        self.isLiked.setTitle(" \(countLikes)", for: .normal)
+        
+
     }
     
 }

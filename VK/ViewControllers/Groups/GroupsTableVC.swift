@@ -12,7 +12,11 @@ private let reuseIdentifier = "groupCell"
 class GroupsTableVC: UITableViewController {
 
     var groups = [GroupModel]()
+    var groupsFiltered = [GroupModel]()
 
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     @IBAction func addGroup(segue: UIStoryboardSegue)
     {
         guard
@@ -25,6 +29,7 @@ class GroupsTableVC: UITableViewController {
         }
         
         groups.append(searchGroups.groups[groupIndexPath.row])
+        groupsFiltered = groups;
         tableView.reloadData()
     }
     
@@ -35,10 +40,24 @@ class GroupsTableVC: UITableViewController {
             UINib(nibName: "GroupCell", bundle: nil),
             forCellReuseIdentifier: reuseIdentifier
         )
+        
+        self.tableView
+            .addGestureRecognizer(
+                UITapGestureRecognizer(
+                    target: self,
+                    action: #selector(hideKeyboard)
+                )
+            )
+        
+        groupsFiltered = groups
     }
 
+    @objc func hideKeyboard() {
+        self.searchBar?.endEditing(true)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groups.count
+        return groupsFiltered.count
     }
 
     
@@ -50,7 +69,7 @@ class GroupsTableVC: UITableViewController {
             return UITableViewCell()
         }
 
-        let currentItem = groups[indexPath.row]
+        let currentItem = groupsFiltered[indexPath.row]
         
         cell.configure(
             name: currentItem.name,
@@ -67,9 +86,25 @@ class GroupsTableVC: UITableViewController {
         if editingStyle == .delete {
             
             groups.remove(at: indexPath.row)
+            groupsFiltered = groups;
             
             tableView.deleteRows(at: [indexPath], with: .fade)
         }   
     }
+}
 
+extension GroupsTableVC: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        groupsFiltered = searchText.isEmpty ? groups : groups.filter { (item: GroupModel) -> Bool in
+            return item.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
 }
