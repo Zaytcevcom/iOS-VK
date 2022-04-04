@@ -87,7 +87,7 @@ class FriendsPhotoVC: UIViewController {
             
         } else if (sender.direction == .down) {
             
-            //self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
             //self.dismiss(animated: true, completion: nil) - без segue
         }
     
@@ -119,6 +119,11 @@ class FriendsPhotoVC: UIViewController {
             photoImageHide.frame.origin.x = photoImage.frame.origin.x + photoImage.frame.width + padding
             index += 1
             
+        } else if (sender.direction == .down) {
+            
+            self.navigationController?.popViewController(animated: true)
+            return
+            //self.dismiss(animated: true, completion: nil) - без segue
         }
         
         UIView.animateKeyframes(
