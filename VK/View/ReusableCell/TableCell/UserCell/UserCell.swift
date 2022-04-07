@@ -6,16 +6,17 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class UserCell: UITableViewCell {
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
     
-    func configure(firstName: String, lastName: String, image: UIImage?)
+    func configure(firstName: String, lastName: String, photo100: String)
     {
         self.userName.text = lastName + " " + firstName
-        self.userImage.image = image
+        self.userImage.kf.setImage(with: URL(string: photo100))
         
         let longGR = UILongPressGestureRecognizer(target: self, action: #selector(handlerLongPress(_:)))
         userImage.addGestureRecognizer(longGR)

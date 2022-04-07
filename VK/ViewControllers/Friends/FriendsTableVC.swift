@@ -18,8 +18,10 @@ class FriendsTableVC: UITableViewController {
     
     var users = [UserModel]()
     var sections = [Section]()
+    
+    private let networkService = NetworkService()
 
-    public func setPhotos(id: Int) -> [PhotoModel]
+    /*public func setPhotos(id: Int) -> [PhotoModel]
     {
         var arr = [PhotoModel]()
         
@@ -39,9 +41,9 @@ class FriendsTableVC: UITableViewController {
         }
         
         return arr
-    }
+    }*/
     
-    public func setData()
+    /*public func setData()
     {
         users.append(UserModel(
             id: 1,
@@ -116,7 +118,7 @@ class FriendsTableVC: UITableViewController {
         ))
         
         tableView.reloadData()
-    }
+    }*/
     
     public func setSections()
     {
@@ -138,6 +140,8 @@ class FriendsTableVC: UITableViewController {
             
             sections.append(section)
         }
+        
+        tableView.reloadData()
     }
     
     public func firstLetters() -> [String] {
@@ -152,7 +156,7 @@ class FriendsTableVC: UITableViewController {
             
             let char = String(user.lastName.prefix(1))
             
-            if !result.contains(char) {
+            if (!char.isEmpty && !result.contains(char)) {
                 result.append(char)
             }
         }
@@ -168,9 +172,22 @@ class FriendsTableVC: UITableViewController {
             forCellReuseIdentifier: reuseIdentifier
         )
         
-        setData()
+        networkService.methodFriendsGet(userId: SomeSingleton.instance.userId) { [weak self] result in
+            switch result {
+            case .success(let users):
+                
+                self?.users = users
+                //self?.tableView.reloadData()
+                self?.setSections()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
         
-        setSections()
+        //setData()
+        
+        //setSections()
     }
     
     // MARK: - Table view data source
@@ -204,7 +221,7 @@ class FriendsTableVC: UITableViewController {
         cell.configure(
             firstName: currentItem.firstName,
             lastName: currentItem.lastName,
-            image: currentItem.image
+            photo100: currentItem.photo100
         )
 
         return cell

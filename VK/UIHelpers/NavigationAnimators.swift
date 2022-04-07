@@ -9,7 +9,7 @@ import UIKit
 
 final class PushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    private let animateTime = 0.4
+    private let animateTime = 0.3
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         animateTime
@@ -55,7 +55,7 @@ final class PushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 
 final class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    private let animateTime = 0.4
+    private let animateTime = 0.3
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         animateTime

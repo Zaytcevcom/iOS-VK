@@ -82,7 +82,6 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Войти"/>
                                         <connections>
                                             <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Opr-Ba-M2j"/>
-                                            <segue destination="feG-GA-1gl" kind="presentation" identifier="goToMain" modalPresentationStyle="fullScreen" id="faF-yw-TNr"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -122,7 +121,43 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="374" y="-311"/>
+            <point key="canvasLocation" x="187" y="527"/>
+        </scene>
+        <!--LoginVC-->
+        <scene sceneID="DKm-iN-Auc">
+            <objects>
+                <viewController id="Dr2-oN-zMj" customClass="VKLoginVC" customModule="VK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VTY-Zj-T8Z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yek-9Y-9xf">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="A7N-lv-KRG"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yek-9Y-9xf" firstAttribute="leading" secondItem="A7N-lv-KRG" secondAttribute="leading" id="9cN-e2-0cf"/>
+                            <constraint firstItem="A7N-lv-KRG" firstAttribute="bottom" secondItem="yek-9Y-9xf" secondAttribute="bottom" id="WfC-3b-Dhp"/>
+                            <constraint firstItem="A7N-lv-KRG" firstAttribute="trailing" secondItem="yek-9Y-9xf" secondAttribute="trailing" id="ZS6-Gw-Yhc"/>
+                            <constraint firstItem="yek-9Y-9xf" firstAttribute="top" secondItem="A7N-lv-KRG" secondAttribute="top" id="dxi-I5-5j7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="PcB-2u-FNd"/>
+                    <connections>
+                        <outlet property="webView" destination="yek-9Y-9xf" id="PLQ-Vy-jGc"/>
+                        <segue destination="feG-GA-1gl" kind="presentation" identifier="toMain" modalPresentationStyle="fullScreen" id="ciK-5U-K2Y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pZr-Q0-5JA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="187" y="-311"/>
         </scene>
         <!--LoaderVC-->
         <scene sceneID="ylt-XE-09J">
@@ -173,12 +208,12 @@
                         <outlet property="view1" destination="Qcf-2h-bTH" id="gYU-XB-1dp"/>
                         <outlet property="view2" destination="5MQ-4n-bT3" id="FpT-Gr-Itp"/>
                         <outlet property="view3" destination="fp5-Nu-wQm" id="V7e-ql-Ou2"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="toLogin" modalPresentationStyle="fullScreen" id="GgC-DW-nNc"/>
+                        <segue destination="Dr2-oN-zMj" kind="presentation" identifier="toLogin" modalPresentationStyle="fullScreen" id="SVY-zl-AJl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O2s-l0-1ch" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-523.1884057971015" y="-311.38392857142856"/>
+            <point key="canvasLocation" x="-942" y="-311"/>
         </scene>
         <!--Контакты-->
         <scene sceneID="LJr-wX-maO">
@@ -296,7 +331,7 @@
                     <navigationItem key="navigationItem" title="Сообщества" id="g4b-VP-qMT">
                         <barButtonItem key="rightBarButtonItem" title="Назад" image="plus" catalog="system" id="Hz8-0M-vSN">
                             <connections>
-                                <segue destination="1Pr-zV-YTp" kind="presentation" id="DQs-tH-fXQ"/>
+                                <segue destination="1Pr-zV-YTp" kind="presentation" identifier="" id="DQs-tH-fXQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

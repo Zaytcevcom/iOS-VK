@@ -12,6 +12,9 @@ private let reuseIdentifier = "photoCollectionCell"
 class FriendsCollectionVC: UICollectionViewController {
 
     var userModel: UserModel?
+    var photos = [PhotoModel]()
+    
+    private let networkService = NetworkService()
     
     override func viewDidLoad() {
         
@@ -21,11 +24,21 @@ class FriendsCollectionVC: UICollectionViewController {
             UINib(nibName: "PhotoCollectionCell", bundle: nil),
             forCellWithReuseIdentifier: reuseIdentifier
         )
+        
+        networkService.methodPhotosGet(userId: (userModel?.id)!) { [weak self] result in
+            switch result {
+            case .success(let items):
+                self?.photos = items
+                self?.collectionView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
+        }
     
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userModel?.photos.count ?? 0
+        return photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -39,13 +52,9 @@ class FriendsCollectionVC: UICollectionViewController {
             return UICollectionViewCell()
         }
         
-        let currentItem = userModel!.photos[indexPath.item]
+        let currentItem = photos[indexPath.item]
         
-        cell.configure(
-            image: currentItem.image,
-            countLikes: currentItem.countLikes,
-            isLiked: currentItem.isLiked
-        )
+        cell.configure(model: currentItem)
     
         return cell
     }
@@ -65,7 +74,7 @@ class FriendsCollectionVC: UICollectionViewController {
             return
         }
         
-        destination.photos = userModel!.photos
+        destination.photos = photos
         destination.index = indexPath.item
     }
     

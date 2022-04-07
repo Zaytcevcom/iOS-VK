@@ -14,6 +14,7 @@ class GroupsTableVC: UITableViewController {
     var groups = [GroupModel]()
     var groupsFiltered = [GroupModel]()
 
+    private let networkService = NetworkService()
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -50,6 +51,19 @@ class GroupsTableVC: UITableViewController {
             )
         
         groupsFiltered = groups
+        
+        networkService.methodGroupsGet(userId: SomeSingleton.instance.userId) { [weak self] result in
+            switch result {
+            case .success(let groups):
+                
+                self?.groups = groups
+                self?.groupsFiltered = groups;
+                self?.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     @objc func hideKeyboard() {
@@ -71,10 +85,7 @@ class GroupsTableVC: UITableViewController {
 
         let currentItem = groupsFiltered[indexPath.row]
         
-        cell.configure(
-            name: currentItem.name,
-            image: currentItem.image
-        )
+        cell.configure(name: currentItem.name, photo100: currentItem.photo100)
 
         return cell
         

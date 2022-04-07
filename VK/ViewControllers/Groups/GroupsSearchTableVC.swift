@@ -12,40 +12,10 @@ private let reuseIdentifier = "groupCell"
 class GroupsSearchTableVC: UITableViewController {
 
     var groups = [GroupModel]()
-    var groupsFiltered = [GroupModel]()
+    
+    private let networkService = NetworkService()
     
     @IBOutlet weak var searchBar: UISearchBar!
-    
-    public func setData()
-    {
-        groups.append(GroupModel(
-            id: 1,
-            name: "MDK",
-            image: UIImage(named: "monkey01.png")
-        ))
-        
-        groups.append(GroupModel(
-            id: 2,
-            name: "Лентач",
-            image: UIImage(named: "monkey02.png")
-        ))
-        
-        groups.append(GroupModel(
-            id: 3,
-            name: "iFeed",
-            image: UIImage(named: "monkey03.png")
-        ))
-        
-        groups.append(GroupModel(
-            id: 4,
-            name: "SMMщики",
-            image: UIImage(named: "monkey04.png")
-        ))
-        
-        groupsFiltered = groups;
-        
-        tableView.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,8 +24,6 @@ class GroupsSearchTableVC: UITableViewController {
             UINib(nibName: "GroupCell", bundle: nil),
             forCellReuseIdentifier: reuseIdentifier
         )
-        
-        self.setData()
         
         /*self.tableView
             .addGestureRecognizer(
@@ -71,7 +39,7 @@ class GroupsSearchTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupsFiltered.count
+        return groups.count
     }
 
     
@@ -83,12 +51,9 @@ class GroupsSearchTableVC: UITableViewController {
             return UITableViewCell()
         }
 
-        let currentItem = groupsFiltered[indexPath.row]
+        let currentItem = groups[indexPath.row]
         
-        cell.configure(
-            name: currentItem.name,
-            image: currentItem.image
-        )
+        cell.configure(name: currentItem.name, photo100: currentItem.photo100)
 
         return cell
     }
@@ -108,11 +73,17 @@ extension GroupsSearchTableVC: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        groupsFiltered = searchText.isEmpty ? groups : groups.filter { (item: GroupModel) -> Bool in
-            return item.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        if (!searchText.isEmpty) {
+            networkService.methodGroupsSearch(query: searchText) { [weak self] result in
+                switch result {
+                case .success(let items):
+                    self?.groups = items
+                    self?.tableView.reloadData()
+                case .failure(let error):
+                    print(error)
+                }
+            }
         }
-        
-        tableView.reloadData()
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PhotoCollectionCell: UICollectionViewCell {
 
@@ -21,6 +22,21 @@ class PhotoCollectionCell: UICollectionViewCell {
         self.isLiked.setTitleColor(.gray, for: .normal)
         
         if (isLiked) {
+            self.isLiked.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+        } else {
+            self.isLiked.setImage(UIImage(systemName: "heart"), for: .normal)
+        }
+        
+        self.isLiked.addTarget(self, action: #selector(likedPhoto(_:)), for: .touchUpInside)
+    }
+    
+    func configure(model: PhotoModel)
+    {
+        self.photoImage.kf.setImage(with: URL(string: (model.sizes.last?.url)!))
+        self.isLiked.setTitle(" \(model.likes.count)", for: .normal)
+        self.isLiked.setTitleColor(.gray, for: .normal)
+        
+        if (model.likes.userLikes == 1) {
             self.isLiked.setImage(UIImage(systemName: "heart.fill"), for: .normal)
         } else {
             self.isLiked.setImage(UIImage(systemName: "heart"), for: .normal)

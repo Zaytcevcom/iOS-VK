@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class FriendsPhotoVC: UIViewController {
 
@@ -21,7 +22,7 @@ class FriendsPhotoVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        photoImage.image = photos[index].image
+        photoImage.kf.setImage(with: URL(string: (photos[index].sizes.last?.url)!))
         photoImage.frame.size.width = view.frame.width
         photoImageHide.frame.size.width = view.frame.width
         
@@ -32,68 +33,7 @@ class FriendsPhotoVC: UIViewController {
         setSwipeRecognizer()
     }
     
-    @objc func handlerSwipe1(_ sender: UISwipeGestureRecognizer) {
-        
-        let duration = 0.3
-        let padding = 5.0
-        
-        if (sender.direction == .right) {
-            
-            if (index <= 0) {
-                return
-            }
-            
-            photoImage.image = photos[index].image
-            photoImageHide.image = photos[index - 1].image
-            photoImageHide.frame.origin.x = photoImage.frame.origin.x - photoImage.frame.width - padding
-            index -= 1
-            
-            UIView.animate(
-                withDuration: duration,
-                delay: 0,
-                options: []
-            ) {
-                self.photoImageHide.frame.origin.x = 0
-                self.photoImage.frame.origin.x = self.photoImageHide.frame.origin.x + self.photoImage.frame.width + padding
-            } completion: { _ in
-                self.photoImage.image = self.photos[self.index].image
-                self.photoImage.frame.origin.x = 0
-                self.setTitle()
-            }
-            
-        } else if (sender.direction == .left) {
-            
-            if (index + 1 >= photos.count) {
-                return
-            }
-            
-            photoImage.image = photos[index].image
-            photoImageHide.image = photos[index + 1].image
-            photoImageHide.frame.origin.x = photoImage.frame.origin.x + photoImage.frame.width + padding
-            index += 1
-            
-            UIView.animate(
-                withDuration: duration,
-                delay: 0,
-                options: []
-            ) {
-                self.photoImageHide.frame.origin.x = 0
-                self.photoImage.frame.origin.x = self.photoImageHide.frame.origin.x - self.photoImage.frame.width - padding
-            } completion: { _ in
-                self.photoImage.image = self.photos[self.index].image
-                self.photoImage.frame.origin.x = 0
-                self.setTitle()
-            }
-            
-        } else if (sender.direction == .down) {
-            
-            self.navigationController?.popViewController(animated: true)
-            //self.dismiss(animated: true, completion: nil) - без segue
-        }
-    
-    }
-    
-    @objc func handlerSwipe2(_ sender: UISwipeGestureRecognizer) {
+    @objc func handlerSwipe(_ sender: UISwipeGestureRecognizer) {
         
         let padding = 5.0
         
@@ -103,8 +43,8 @@ class FriendsPhotoVC: UIViewController {
                 return
             }
             
-            photoImage.image = photos[index].image
-            photoImageHide.image = photos[index - 1].image
+            photoImage.kf.setImage(with: URL(string: (photos[index].sizes.last?.url)!))
+            photoImageHide.kf.setImage(with: URL(string: (photos[index - 1].sizes.last?.url)!))
             photoImageHide.frame.origin.x = photoImage.frame.origin.x - photoImage.frame.width - padding
             index -= 1
             
@@ -114,8 +54,8 @@ class FriendsPhotoVC: UIViewController {
                 return
             }
             
-            photoImage.image = photos[index].image
-            photoImageHide.image = photos[index + 1].image
+            photoImage.kf.setImage(with: URL(string: (photos[index].sizes.last?.url)!))
+            photoImageHide.kf.setImage(with: URL(string: (photos[index + 1].sizes.last?.url)!))
             photoImageHide.frame.origin.x = photoImage.frame.origin.x + photoImage.frame.width + padding
             index += 1
             
@@ -127,7 +67,7 @@ class FriendsPhotoVC: UIViewController {
         }
         
         UIView.animateKeyframes(
-            withDuration: 0.6,
+            withDuration: 0.5,
             delay: 0,
             options: []) {
                 
@@ -144,7 +84,7 @@ class FriendsPhotoVC: UIViewController {
                     }
                 
             } completion: { _ in
-                self.photoImage.image = self.photos[self.index].image
+                self.photoImage.kf.setImage(with: URL(string: (self.photos[self.index].sizes.last?.url)!))
                 self.photoImage.transform = .identity
                 self.setTitle()
             }
@@ -158,13 +98,13 @@ class FriendsPhotoVC: UIViewController {
     
     func setSwipeRecognizer()
     {
-        let swipeRightGR = UISwipeGestureRecognizer(target: self, action: #selector(handlerSwipe2(_:)))
+        let swipeRightGR = UISwipeGestureRecognizer(target: self, action: #selector(handlerSwipe(_:)))
         swipeRightGR.direction = .right
         
-        let swipeLeftGR = UISwipeGestureRecognizer(target: self, action: #selector(handlerSwipe2(_:)))
+        let swipeLeftGR = UISwipeGestureRecognizer(target: self, action: #selector(handlerSwipe(_:)))
         swipeLeftGR.direction = .left
         
-        let swipeDownGR = UISwipeGestureRecognizer(target: self, action: #selector(handlerSwipe2(_:)))
+        let swipeDownGR = UISwipeGestureRecognizer(target: self, action: #selector(handlerSwipe(_:)))
         swipeDownGR.direction = .down
         
         view.addGestureRecognizer(swipeRightGR)
