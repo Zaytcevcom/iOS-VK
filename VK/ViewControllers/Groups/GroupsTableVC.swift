@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseDatabase
 
 private let reuseIdentifier = "groupCell"
 
@@ -16,6 +17,7 @@ class GroupsTableVC: UITableViewController {
     private var groupsToken: NotificationToken?
     
     private let networkService = NetworkService()
+    private let reference = Database.database().reference()
     
     public var userId: Int = SomeSingleton.instance.userId
     
@@ -42,6 +44,9 @@ class GroupsTableVC: UITableViewController {
         addGroup.photo200 = groupInfo.photo200 ?? ""
         
         try? RealmService.save(items: [addGroup])
+        
+        // Отправка данных о добавлении сообщетсва пользователем в Firebase
+        sendStatsToFirebase(groupId: groupInfo.id)
     }
     
     
@@ -207,6 +212,19 @@ class GroupsTableVC: UITableViewController {
                 print(error)
             }
         }
+    }
+    
+    
+    // MARK: - Отправка данных о добавлении сообщетсва пользователем в Firebase
+    private func sendStatsToFirebase(groupId: Int)
+    {
+        let fbUser = FirebaseGroupsStatsModel(groupId: groupId, time: Int(NSDate().timeIntervalSince1970))
+        
+        reference
+            .child("groups")
+            .child(String(userId))
+            .child(String(groupId))
+            .setValue(fbUser.toAnyObject())
     }
 }
 

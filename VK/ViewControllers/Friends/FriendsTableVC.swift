@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseDatabase
 
 private let reuseIdentifier = "userCell"
 
@@ -23,6 +24,7 @@ class FriendsTableVC: UITableViewController {
     private var friendsToken: NotificationToken?
     
     private let networkService = NetworkService()
+    private let reference = Database.database().reference()
     
     public var userId: Int = SomeSingleton.instance.userId
     
@@ -41,8 +43,12 @@ class FriendsTableVC: UITableViewController {
         
         // Загрузка данных из сети в Realm
         loadDataFromNetwork(userId: userId)
+        
+        // Отправка данных о просмотре страницы друзей в Firebase
+        sendStatsToFirebase()
+        
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -242,6 +248,18 @@ class FriendsTableVC: UITableViewController {
                 print(error)
             }
         }
+    }
+    
+    
+    // MARK: - Отправка данных о просмотре страницы друзей в Firebase
+    private func sendStatsToFirebase()
+    {
+        let fbUser = FirebaseFriendsStatsModel(id: userId, time: Int(NSDate().timeIntervalSince1970))
+        
+        reference
+            .child("friends")
+            .child(String(userId))
+            .setValue(fbUser.toAnyObject())
     }
 }
 
