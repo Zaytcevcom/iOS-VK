@@ -13,8 +13,6 @@ struct UserModel {
     let lastName: String
     let photo100: String
     let photo200: String
-    //let image: UIImage?
-    //var photos: [PhotoModel] = []
 }
 
 extension UserModel: Codable {

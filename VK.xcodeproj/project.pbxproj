@@ -17,6 +17,9 @@
 		9D36D94727F02F2600B795E6 /* LoaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D36D94627F02F2600B795E6 /* LoaderVC.swift */; };
 		9D413EF427FB4EE700CCFA2C /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D413EF327FB4EE700CCFA2C /* Singleton.swift */; };
 		9D413EF727FB5B9D00CCFA2C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D413EF627FB5B9D00CCFA2C /* NetworkService.swift */; };
+		9D41A4D0280077E8002F458C /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D41A4CF280077E8002F458C /* RealmService.swift */; };
+		9D41A4D328007AE9002F458C /* RealmFriendModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D41A4D228007AE9002F458C /* RealmFriendModel.swift */; };
+		9D41A4D528007E6D002F458C /* RealmGroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D41A4D428007E6D002F458C /* RealmGroupModel.swift */; };
 		9D4B410327FDE7F000AA1CA4 /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4B410227FDE7F000AA1CA4 /* VKResponse.swift */; };
 		9D4E0730277707E400225D1F /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4E072E277707E400225D1F /* UserCell.swift */; };
 		9D4E0731277707E400225D1F /* UserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D4E072F277707E400225D1F /* UserCell.xib */; };
@@ -52,6 +55,9 @@
 		9D36D94627F02F2600B795E6 /* LoaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderVC.swift; sourceTree = "<group>"; };
 		9D413EF327FB4EE700CCFA2C /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		9D413EF627FB5B9D00CCFA2C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		9D41A4CF280077E8002F458C /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		9D41A4D228007AE9002F458C /* RealmFriendModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmFriendModel.swift; sourceTree = "<group>"; };
+		9D41A4D428007E6D002F458C /* RealmGroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmGroupModel.swift; sourceTree = "<group>"; };
 		9D4B410227FDE7F000AA1CA4 /* VKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKResponse.swift; sourceTree = "<group>"; };
 		9D4E072E277707E400225D1F /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		9D4E072F277707E400225D1F /* UserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserCell.xib; sourceTree = "<group>"; };
@@ -120,8 +126,18 @@
 			isa = PBXGroup;
 			children = (
 				9D413EF627FB5B9D00CCFA2C /* NetworkService.swift */,
+				9D41A4CF280077E8002F458C /* RealmService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		9D41A4D128007ACE002F458C /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				9D41A4D228007AE9002F458C /* RealmFriendModel.swift */,
+				9D41A4D428007E6D002F458C /* RealmGroupModel.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		9D4E072C2777073700225D1F /* ReusableCell */ = {
@@ -208,6 +224,7 @@
 		9D4E07412777535A00225D1F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9D41A4D128007ACE002F458C /* Realm */,
 				9D4E07422777538500225D1F /* UserModel.swift */,
 				9D4B410227FDE7F000AA1CA4 /* VKResponse.swift */,
 				9D4E0744277753C200225D1F /* GroupModel.swift */,
@@ -425,6 +442,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D41A4D528007E6D002F458C /* RealmGroupModel.swift in Sources */,
+				9D41A4D328007AE9002F458C /* RealmFriendModel.swift in Sources */,
 				9D413EF727FB5B9D00CCFA2C /* NetworkService.swift in Sources */,
 				9D4E07342777081F00225D1F /* GroupCell.swift in Sources */,
 				9D413EF427FB4EE700CCFA2C /* Singleton.swift in Sources */,
@@ -449,6 +468,7 @@
 				9D4E07432777538500225D1F /* UserModel.swift in Sources */,
 				9D36D94727F02F2600B795E6 /* LoaderVC.swift in Sources */,
 				9D0B967227FB71FE006DE3DB /* VKLoginVC.swift in Sources */,
+				9D41A4D0280077E8002F458C /* RealmService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

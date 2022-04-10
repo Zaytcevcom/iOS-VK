@@ -11,7 +11,7 @@ private let reuseIdentifier = "photoCollectionCell"
 
 class FriendsCollectionVC: UICollectionViewController {
 
-    var userModel: UserModel?
+    var userId: Int = 0
     var photos = [PhotoModel]()
     
     private let networkService = NetworkService()
@@ -25,7 +25,7 @@ class FriendsCollectionVC: UICollectionViewController {
             forCellWithReuseIdentifier: reuseIdentifier
         )
         
-        networkService.methodPhotosGet(userId: (userModel?.id)!) { [weak self] result in
+        networkService.methodPhotosGet(userId: userId) { [weak self] result in
             switch result {
             case .success(let items):
                 self?.photos = items

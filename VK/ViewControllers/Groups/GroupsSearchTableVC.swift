@@ -13,6 +13,8 @@ class GroupsSearchTableVC: UITableViewController {
 
     var groups = [GroupModel]()
     
+    private var timer = Timer()
+    
     private let networkService = NetworkService()
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -74,15 +76,24 @@ extension GroupsSearchTableVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if (!searchText.isEmpty) {
-            networkService.methodGroupsSearch(query: searchText) { [weak self] result in
-                switch result {
-                case .success(let items):
-                    self?.groups = items
-                    self?.tableView.reloadData()
-                case .failure(let error):
-                    print(error)
+            
+            timer.invalidate()
+            
+            timer = Timer.scheduledTimer(
+                withTimeInterval: 0.7,
+                repeats: false,
+                block: { _ in
+                    self.networkService.methodGroupsSearch(query: searchText) { [weak self] result in
+                    switch result {
+                    case .success(let items):
+                        self?.groups = items
+                        self?.tableView.reloadData()
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
-            }
+            })
+            
         }
     }
     

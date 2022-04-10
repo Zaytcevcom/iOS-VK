@@ -13,7 +13,6 @@ struct GroupModel {
     let photo50: String?
     let photo100: String
     let photo200: String?
-    //let image: UIImage?
 }
 
 extension GroupModel: Codable {

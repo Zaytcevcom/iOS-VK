@@ -222,6 +222,14 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" id="eJT-9s-pVa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="deD-lP-fhH">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="Qba-W9-upR" id="5yi-iJ-dO2"/>
+                            </connections>
+                        </searchBar>
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="Qba-W9-upR" id="nPF-Hl-foq"/>
@@ -230,6 +238,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Контакты" id="FpR-wE-DWG"/>
                     <connections>
+                        <outlet property="searchBar" destination="deD-lP-fhH" id="COY-FI-utp"/>
                         <segue destination="dz0-f9-5yY" kind="show" identifier="showPhoto" id="MZa-yJ-M3J"/>
                     </connections>
                 </tableViewController>
